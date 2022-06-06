@@ -3,6 +3,8 @@ Tulip Easy Json Reader
 
 Read Json values exactly as properties.
 
+# Befor you start you must know. this TulipEasyJsonReady only work with capital letters json keys with now spaces in it.
+
 # example:
 
 ```json
