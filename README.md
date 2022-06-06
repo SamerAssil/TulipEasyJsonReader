@@ -59,3 +59,7 @@ the index as usual started with 0
 ```Delphi
    Edit1.Text := jval.data.Address.Tel.elem1.Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
 ```
+
+
+# Installation
+No installation.. Just put TulipEasyJsonReader in uses section. and ready to go.
