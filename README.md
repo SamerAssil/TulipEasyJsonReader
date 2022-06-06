@@ -3,7 +3,21 @@ Tulip Easy Json Reader
 
 Read Json values exactly as properties.
 
-# Before you start you should know. this TulipEasyJsonReady only work with capital letters json keys with now spaces in it.
+# Before you start you should know:
+ - TulipEasyJsonReader for reading only. you cann't use it to change json values. ( at least for now. maybe later ).
+ - TulipEasyJsonReader is a simple tool and it's build to be very simple. not to be full functional.
+ - The json keys names must folow the rolles of property name in Delphi language (no spaces, starting with letters not numbers... ). and must in capital letters.
+ 
+ examples:
+ 
+  | key| allow | Why? |
+  |:-:|:-:|:-|
+  |FIRSTNAME| YES | |
+  |FIRST NAME| no | include a space in it|
+  |FirstName|no| must be capital letters|
+  |firstname| no | must be capital letters |
+  |1firstname| no | start with number |
+
 
 # example:
 
