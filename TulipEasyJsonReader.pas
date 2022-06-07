@@ -1,23 +1,21 @@
-{*******************************************************}
-{                                                       }
-{               TULIP EASY JSON READER                  }
-{                                                       }
-{                 SAMER ASSIL - 2022                    }
-{                                                       }
-{*******************************************************}
+{ ******************************************************* }
+{ }
+{ TULIP EASY JSON READER }
+{ }
+{ SAMER ASSIL - 2022 }
+{ }
+{ ******************************************************* }
 
 unit TulipEasyJsonReader;
-
 
 /// IMPORTANT
 /// ALL KEYS IN THE JSON MUST BE IN CAPITAL CASE AND HAS NO SPACES
 ///
-///  to use it:
-///  1. create TjsonValue object.
-///  2. use property "data" to access the json fields.
+/// to use it:
+/// 1. create TjsonValue object.
+/// 2. use property "data" to access the json fields.
 ///
-///  To get elements from array use the key word (elem) folowd by the index.
-///  ex.  elem0, elem1, elem2....
+/// To get elements from array , just pass the index as parameter.
 ///
 
 interface
@@ -41,6 +39,8 @@ type
     procedure Copy( var Dest: TVarData; const Source: TVarData; const Indirect: Boolean ); override;
     function GetProperty( var Dest: TVarData; const V: TVarData; const Name: string ): Boolean; override;
     function SetProperty( const V: TVarData; const Name: string; const Value: TVarData ): Boolean; override;
+    function DoFunction( var Dest: TVarData; const V: TVarData; const Name: string; const Arguments: TVarDataArray ): Boolean; override;
+
   end;
 
 type
@@ -71,37 +71,62 @@ begin
   SimplisticCopy( Dest, Source, Indirect );
 end;
 
+function TVarJsonValueType.DoFunction( var Dest: TVarData; const V: TVarData;
+  const Name: string; const Arguments: TVarDataArray ): Boolean;
+var
+  jv: TJsonValue;
+  lv: TJsonValue;
+begin
+  jv     := TVarJsonValueData( V ).JVal.FindValue( Name );
+  result := true;
+
+  lv := TJsonArray( jv ).Get( Arguments[0].VInteger );
+
+  if ( lv is TJsonString ) or ( lv is TJsonNumber ) or ( lv is TJSONBool ) or ( lv is TJSONNull ) then
+  begin
+    Variant( Dest ) := lv.Value;
+    exit;
+  end;
+
+  if ( lv is TJsonArray ) or ( lv is TJSONObject ) then
+  begin
+    Variant( Dest ) := lv.data;
+    exit;
+  end;
+
+end;
+
 function TVarJsonValueType.GetProperty( var Dest: TVarData; const V: TVarData; const Name: string ): Boolean;
 var
   jv: TJsonValue;
 begin
+  jv     := TVarJsonValueData( V ).JVal.FindValue( Name );
+  result := Assigned( jv );
 
-    jv     := TVarJsonValueData( V ).JVal.FindValue( Name );
-    result := Assigned( jv );
+  if result then
+  begin
 
-    if result then
+    if ( jv is TJsonArray ) then
     begin
+      Variant( Dest ) := jv.data;
+      exit;
+    end;
 
-      if ( jv is TJsonArray ) then
-      begin
-        Variant( Dest ) := jv.data;
-        exit;
-      end;
+    if ( jv is TJsonString ) or ( jv is TJsonNumber ) or ( jv is TJSONBool ) or ( jv is TJSONNull ) then
+    begin
+      Variant( Dest ) := jv.Value;
+      exit;
+    end;
 
-      if ( jv is TJsonString ) or ( jv is TJsonNumber ) then
-      begin
-        Variant( Dest ) := jv.Value;
-        exit;
-      end;
+    if ( jv is TJsonValue ) or ( jv is TJSONObject ) then
+    begin
+      Variant( Dest ) := jv.data;
+      exit;
+    end;
 
-      if ( jv is TJsonValue ) or ( jv is TJsonValue ) then
-      begin
-        Variant( Dest ) := jv.data;
-        exit;
-      end;
-    end
-    else
-      raise Exception.Create( format( '"%s" not found', [Name] ) );
+  end
+  else
+    raise Exception.Create( format( '"%s" not found', [Name] ) );
 
 end;
 
@@ -115,34 +140,10 @@ end;
 function TJsonValueHelper.GetData: Variant;
 begin
   try
-    var
-      s: string := Self.ToJSON;
-    if Self is TJsonArray then
-    begin
-      var
-        j: tjsonobject;
-      j := tjsonobject.Create;
-      var
-        item: TJsonValue;
-      var
-        i: integer := 0;
 
-      for item in TJsonArray( Self ) do
-      begin
-        j.AddPair( UpperCase( 'elem' ) + i.tostring, item );
-        inc( i );
-      end;
-
-      VarClear( result );
-      TVarJsonValueData( result ).VType := VarJsonValueType.VarType;
-      TVarJsonValueData( result ).JVal  := j as TJsonValue;
-    end
-    else
-    begin
-      VarClear( result );
-      TVarJsonValueData( result ).VType := VarJsonValueType.VarType;
-      TVarJsonValueData( result ).JVal  := Self;
-    end;
+    VarClear( result );
+    TVarJsonValueData( result ).VType := VarJsonValueType.VarType;
+    TVarJsonValueData( result ).JVal  := Self;
 
   except
     On E: Exception do

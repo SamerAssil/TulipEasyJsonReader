@@ -51,12 +51,12 @@ implementation
 
 procedure TForm1.Button1Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Lang.elem1;
+  Edit1.Text := jval.data.Lang(1);
 end;
 
 procedure TForm1.Button2Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Lang.elem2;
+  Edit1.Text := jval.data.Lang(2);
 end;
 
 procedure TForm1.Button3Click( Sender: TObject );
@@ -84,17 +84,17 @@ end;
 
 procedure TForm1.Button6Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Address.Tel.elem0.Home;
+  Edit1.Text := jval.data.Address.Tel(0).Home;
 end;
 
 procedure TForm1.Button7Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Address.Tel.elem1.Mobile;
+  Edit1.Text := jval.data.Address.Tel(1).Mobile;
 end;
 
 procedure TForm1.Button8Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Address.Tel.elem1.Ext;
+  Edit1.Text := jval.data.Address.Tel(1).Ext;
 end;
 
 procedure TForm1.Button9Click( Sender: TObject );
