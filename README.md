@@ -64,16 +64,15 @@ The return is Variant so you can assign it to a variable without warry about cas
 ```
 
 # Reading from Array 
-To access element in array use the keyward "elem" followd by the index of the element like: elem0, elem1, elem2.. 
-the index as usual started with 0 
 
 ```Delphi
-   Edit1.Text := jval.data.Lang.elem1; // getting the second element value from the array object.
+   Edit1.Text := jval.data.Lang(1); // getting the second element value from the array object.
 ```
  
 # Object in Array
+
 ```Delphi
-   Edit1.Text := jval.data.Address.Tel.elem1.Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
+   Edit1.Text := jval.data.Address.Tel(1).Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
 ```
 
 
