@@ -22,7 +22,7 @@ interface
 
 
 uses
-  System.JSON, System.SysUtils, System.Variants, FMX.Dialogs;
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants, FMX.Dialogs;
 
 type
 
@@ -34,11 +34,12 @@ type
   end;
 
   TVarJsonValueType = class( TInvokeableVariantType )
+
+  protected
+    function FixupIdent( const AText: string ): string; override;
   public
     procedure Clear( var V: TVarData ); override;
     procedure Copy( var Dest: TVarData; const Source: TVarData; const Indirect: Boolean ); override;
-    function GetProperty( var Dest: TVarData; const V: TVarData; const Name: string ): Boolean; override;
-    function SetProperty( const V: TVarData; const Name: string; const Value: TVarData ): Boolean; override;
     function DoFunction( var Dest: TVarData; const V: TVarData; const Name: string; const Arguments: TVarDataArray ): Boolean; override;
 
   end;
@@ -77,62 +78,60 @@ var
   jv: TJsonValue;
   lv: TJsonValue;
 begin
-  jv     := TVarJsonValueData( V ).JVal.FindValue( Name );
-  result := true;
+  try
+    Result := true;
+    jv := TVarJsonValueData( V ).JVal.FindValue( Name );
 
-  lv := TJsonArray( jv ).Get( Arguments[0].VInteger );
+    if not Assigned( jv ) then
+      raise Exception.Create( format( '"%s" not found', [Name] ) );
 
-  if ( lv is TJsonString ) or ( lv is TJsonNumber ) or ( lv is TJSONBool ) or ( lv is TJSONNull ) then
-  begin
-    Variant( Dest ) := lv.Value;
-    exit;
-  end;
+    if length( Arguments ) > 0 then
+    begin
+      lv := TJsonArray( jv ).Get( Arguments[0].VInteger );
+      if not Assigned( lv ) then
+        raise Exception.Create( format( '"%s" not found', [Name] ) );
+      if ( lv is TJsonString ) or ( lv is TJsonNumber ) or ( lv is TJSONBool ) or ( lv is TJSONNull ) then
+      begin
+        Variant( Dest ) := lv.Value;
+        exit;
+      end;
 
-  if ( lv is TJsonArray ) or ( lv is TJSONObject ) then
-  begin
-    Variant( Dest ) := lv.data;
-    exit;
+      if ( lv is TJsonArray ) or ( lv is TJSONObject ) then
+      begin
+        Variant( Dest ) := lv.data;
+        exit;
+      end;
+
+    end
+    else
+    begin
+
+      if ( jv is TJsonString ) or ( jv is TJsonNumber ) or ( jv is TJSONBool ) or ( jv is TJSONNull ) then
+      begin
+        Variant( Dest ) := jv.Value;
+        exit;
+      end;
+
+      if ( jv is TJsonArray ) or ( jv is TJSONObject ) then
+      begin
+        Variant( Dest ) := jv.data;
+        exit;
+      end;
+    end;
+
+  except on E: exception do
+    begin
+    Result := false;
+    raise Exception.Create(E.Message);
+    end;
   end;
 
 end;
 
-function TVarJsonValueType.GetProperty( var Dest: TVarData; const V: TVarData; const Name: string ): Boolean;
-var
-  jv: TJsonValue;
+function TVarJsonValueType.FixupIdent( const AText: string ): string;
 begin
-  jv     := TVarJsonValueData( V ).JVal.FindValue( Name );
-  result := Assigned( jv );
-
-  if result then
-  begin
-
-    if ( jv is TJsonArray ) then
-    begin
-      Variant( Dest ) := jv.data;
-      exit;
-    end;
-
-    if ( jv is TJsonString ) or ( jv is TJsonNumber ) or ( jv is TJSONBool ) or ( jv is TJSONNull ) then
-    begin
-      Variant( Dest ) := jv.Value;
-      exit;
-    end;
-
-    if ( jv is TJsonValue ) or ( jv is TJSONObject ) then
-    begin
-      Variant( Dest ) := jv.data;
-      exit;
-    end;
-
-  end
-  else
-    raise Exception.Create( format( '"%s" not found', [Name] ) );
-
-end;
-
-function TVarJsonValueType.SetProperty( const V: TVarData; const Name: string; const Value: TVarData ): Boolean;
-begin
-
+  Result := AText;
+  Result := ReplaceText( Result, '__', ' ' );
 end;
 
 { TJsonValueHelper }
@@ -140,16 +139,15 @@ end;
 function TJsonValueHelper.GetData: Variant;
 begin
   try
-
-    VarClear( result );
-    TVarJsonValueData( result ).VType := VarJsonValueType.VarType;
-    TVarJsonValueData( result ).JVal  := Self;
+    VarClear( Result );
+    TVarJsonValueData( Result ).VType := VarJsonValueType.VarType;
+    TVarJsonValueData( Result ).JVal  := Self;
 
   except
     On E: Exception do
       raise Exception.Create( '[TulipJsonParse] ' + E.Message );
   end;
-  // result := VarJsonValueCreate( Self );
+
 end;
 
 initialization

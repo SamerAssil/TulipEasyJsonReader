@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Tulip EasyJsonReader'
+  Caption = 'V'
   ClientHeight = 493
-  ClientWidth = 754
+  ClientWidth = 641
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -15,20 +15,20 @@ object Form1: TForm1
     DataDetectorTypes = []
     Lines.Strings = (
       '{'
-      '   "FIRSTNAME":"Samer",'
-      '   "LASTNAME":"Assil",'
+      '   "First Name":"Samer",'
+      '   "LastName":"Assil",'
       '   "AGE":47,'
-      '   "LANG":['
+      '   "Lang":['
       '      "Arabic",'
       '      "English",'
       '      "Turkish"'
       '   ],'
-      '   "ADDRESS":{'
-      '      "CITY":"Ankara",'
-      '      "STREET":"B123",'
-      '      "TEL":['
-      '         { "HOME":"123123123" },'
-      '         { "MOBILE":"123412341234", "EXT":9 }'
+      '   "Address":{'
+      '      "City":"Ankara",'
+      '      "Street":"B123",'
+      '      "Tel":['
+      '         { "Home":"123123123" },'
+      '         { "Mobile":"123412341234", "EXT":9 }'
       '      ]'
       '   }'
       '}')
@@ -36,22 +36,22 @@ object Form1: TForm1
     TextSettings.Font.Size = 14.000000000000000000
     Position.X = 24.000000000000000000
     Position.Y = 32.000000000000000000
-    Size.Width = 281.000000000000000000
-    Size.Height = 441.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 417.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     OnExit = Memo1Exit
-    Viewport.Width = 277.000000000000000000
-    Viewport.Height = 437.000000000000000000
+    Viewport.Width = 293.000000000000000000
+    Viewport.Height = 413.000000000000000000
   end
   object Button1: TButton
     Position.X = 344.000000000000000000
     Position.Y = 149.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Text = ' [Array]   Lang(1)'
+    Text = 'Lang(1) '
     OnClick = Button1Click
   end
   object Edit1: TEdit
@@ -61,7 +61,7 @@ object Form1: TForm1
     TextSettings.FontColor = claRed
     TextSettings.HorzAlign = Center
     Position.X = 344.000000000000000000
-    Position.Y = 424.000000000000000000
+    Position.Y = 416.000000000000000000
     Size.Width = 265.000000000000000000
     Size.Height = 33.000000000000000000
     Size.PlatformDefault = False
@@ -70,80 +70,156 @@ object Form1: TForm1
   object Button2: TButton
     Position.X = 344.000000000000000000
     Position.Y = 179.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 9
-    Text = ' [Array]   Lang(2)'
+    Text = 'Lang(2)'
     OnClick = Button2Click
   end
   object Button3: TButton
     Position.X = 344.000000000000000000
     Position.Y = 76.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 8
-    Text = '[String] FirstName'
+    Text = 'First Name '
     OnClick = Button3Click
   end
   object Button4: TButton
     Position.X = 344.000000000000000000
     Position.Y = 106.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 7
-    Text = '[number or string]  Age'
+    Text = 'AGE'
     OnClick = Button4Click
   end
   object Button5: TButton
     Position.X = 344.000000000000000000
     Position.Y = 240.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 6
-    Text = '[Object]  Address.City'
+    Text = 'Address.City'
     OnClick = Button5Click
   end
   object Button6: TButton
     Position.X = 344.000000000000000000
     Position.Y = 302.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
-    Text = '[Object in Array]  Address.Tel(0).Home'
+    Text = 'Address.Tel(0).Home'
     OnClick = Button6Click
   end
   object Button7: TButton
     Position.X = 344.000000000000000000
     Position.Y = 332.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 4
-    Text = '[Object in Array]  Address.Tel(1).Mobile'
+    Text = 'Address.Tel(1).Mobile'
     OnClick = Button7Click
   end
   object Button8: TButton
     Position.X = 344.000000000000000000
     Position.Y = 362.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
-    Text = '[Object in Array]  Address.Tel(1).Ext;'
+    Text = 'Address.Tel(1).Ext'
     OnClick = Button8Click
   end
   object Button9: TButton
     Position.X = 344.000000000000000000
     Position.Y = 32.000000000000000000
-    Size.Width = 265.000000000000000000
+    Size.Width = 170.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 10
     Text = 'Load json from memo'
+  end
+  object Label1: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 76.000000000000000000
+    TextSettings.FontColor = claBlue
+    Text = 'with space'
+    TabOrder = 18
+  end
+  object Label2: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 111.000000000000000000
+    TextSettings.FontColor = claBlue
+    Text = 'Case Sensitive'
+    TabOrder = 17
+  end
+  object Label3: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 149.000000000000000000
+    TextSettings.FontColor = claBlue
+    Text = 'From Array'
+    TabOrder = 16
+  end
+  object Label4: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 184.000000000000000000
+    TextSettings.FontColor = claBlue
+    Text = 'From Array'
+    TabOrder = 15
+  end
+  object Label5: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 240.000000000000000000
+    Size.Width = 56.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claBlue
+    Text = 'Nested'
+    TabOrder = 14
+  end
+  object Label6: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 302.000000000000000000
+    Size.Width = 88.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claBlue
+    Text = 'Array of objects'
+    TabOrder = 13
+  end
+  object Label7: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 337.000000000000000000
+    Size.Width = 88.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claBlue
+    Text = 'Array of objects'
+    TabOrder = 12
+  end
+  object Label8: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 522.000000000000000000
+    Position.Y = 362.000000000000000000
+    Size.Width = 88.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claBlue
+    Text = 'Array of objects'
+    TabOrder = 11
   end
 end

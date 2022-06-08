@@ -10,6 +10,8 @@ uses
   FMX.ScrollBox, FMX.Memo, TulipEasyJsonReader;
 
 type
+  &Type = String;
+
   TForm1 = class( TForm )
     Memo1: TMemo;
     Button1: TButton;
@@ -22,6 +24,14 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
     procedure Button1Click( Sender: TObject );
     procedure FormCreate( Sender: TObject );
     procedure FormDestroy( Sender: TObject );
@@ -61,25 +71,26 @@ end;
 
 procedure TForm1.Button3Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.firstname;
+  // for space use two underscores instead
+  Edit1.Text := jval.data.First__Name;
 end;
 
 procedure TForm1.Button4Click( Sender: TObject );
 begin
   // as String
-  Edit1.Text := jval.data.age;
+  Edit1.Text := jval.data.AGE;
 
   // as number
   var
     age: integer;
-  age := jval.data.age;
+  age := jval.data.AGE;
 
-  Edit1.Text := age.ToString;
+  //Edit1.Text := AGE.ToString;
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  Edit1.Text := jval.data.Address.city;
+  Edit1.Text := jval.data.Address.City;
 end;
 
 procedure TForm1.Button6Click( Sender: TObject );
@@ -94,7 +105,7 @@ end;
 
 procedure TForm1.Button8Click( Sender: TObject );
 begin
-  Edit1.Text := jval.data.Address.Tel(1).Ext;
+  Edit1.Text := jval.data.Address.Tel(1).EXT;
 end;
 
 procedure TForm1.Button9Click( Sender: TObject );
