@@ -21,17 +21,6 @@ Read Json values exactly as properties.
    Edit1.Text := jval.data.LastName;
 ```
 
- examples:
-
-  | key| allow | Why? |
-  |:-:|:-:|:-|
-  |FIRSTNAME| YES | |
-  |FIRST NAME| no | include a space in it|
-  |FirstName|no| must be capital letters|
-  |firstname| no | must be capital letters |
-  |1firstname| no | start with number |
-
-
 # example:
 
 ```json
