@@ -45,11 +45,17 @@ Read Json values exactly as properties.
 
 to get lastname value:
 ```Delphi
+  var
+    Jval: TJsonValue;
+   ...
   Edit1.Text := jval.data.firstname;
 ```
 
 get Address -> city
 ```Delphi
+  var
+    Jval: TJsonValue;
+   ...
   Edit1.Text := jval.data.Address.city;
 ```
 
@@ -57,6 +63,9 @@ get Address -> city
 The return is Variant so you can assign it to a variable without warry about casting it. :)
 
 ```Delphi
+  var
+    Jval: TJsonValue;
+   ...
   Edit1.Text := jval.data.age; // using age value as string
   
   var MyAge: Integer;
@@ -66,15 +75,21 @@ The return is Variant so you can assign it to a variable without warry about cas
 # Reading from Array 
 
 ```Delphi
+  var
+    Jval: TJsonValue;
+   ...
    Edit1.Text := jval.data.Lang(1); // getting the second element value from the array object.
 ```
  
 # Object in Array
 
 ```Delphi
+  var
+    Jval: TJsonValue;
+   ...
+
    Edit1.Text := jval.data.Address.Tel(1).Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
 ```
-
 
 # Installation
 No installation.. Just put TulipEasyJsonReader in uses section. and ready to go.
