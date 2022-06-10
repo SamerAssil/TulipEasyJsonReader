@@ -41,16 +41,17 @@ type
     procedure Clear( var V: TVarData ); override;
     procedure Copy( var Dest: TVarData; const Source: TVarData; const Indirect: Boolean ); override;
     function DoFunction( var Dest: TVarData; const V: TVarData; const Name: string; const Arguments: TVarDataArray ): Boolean; override;
-
   end;
 
+{$A16}
 type
-  TVarJsonValueData = packed record
+  TVarJsonValueData =  record
     VType: TVarType;
     Reserved1, Reserved2, Reserved3: Word;
     JVal: TJsonValue;
-    Reserved4: LongInt;
+    Reserved4: LongWord;
   end;
+
 
 var
   VarJsonValueType: TVarJsonValueType = nil;
