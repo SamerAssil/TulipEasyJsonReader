@@ -1,6 +1,13 @@
 # TulipEasyJsonReader
 Tulip Easy Json Reader
 
+# Support
+- Windows 32bit and 64bit (Console, VCL, FMX)
+- MacOS 64bit(FMX)
+
+# Platform
+. 
+
 Read Json values exactly as properties.
 
 # Before you start you should know:
