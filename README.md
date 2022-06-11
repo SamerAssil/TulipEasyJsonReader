@@ -3,7 +3,8 @@ Tulip Easy Json Reader
 
 # Support
 - Windows 32bit and 64bit (Console, VCL, FMX)
-- MacOS 64bit(FMX)
+- Android (FMX)
+- MacOS (FMX)
 
 # Platform
 . 
