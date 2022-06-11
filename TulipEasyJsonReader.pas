@@ -22,7 +22,7 @@ interface
 
 
 uses
-  System.JSON, System.SysUtils, System.StrUtils, System.Variants, FMX.Dialogs;
+  System.JSON, System.SysUtils, System.StrUtils, System.Variants;
 
 type
 
