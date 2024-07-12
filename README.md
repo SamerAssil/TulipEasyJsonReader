@@ -19,14 +19,14 @@ Read Json values exactly as properties.
 
 
  # How to use
- use the new property **data** of TJsonValue.
+ use the new property **jdata** of TJsonValue. ( it was before data )
 
 ```Delphi
   var
     Jval: TJsonValue;
 
   ..
-   Edit1.Text := jval.data.LastName;
+   Edit1.Text := jval.jdata.LastName;
 ```
 
 # example:
@@ -58,7 +58,7 @@ Read Json values exactly as properties.
   var
     Jval: TJsonValue;
    ...
-  Edit1.Text := jval.data.AGE;
+  Edit1.Text := jval.jdata.AGE;
 ```
 
 ```Delphi
@@ -66,7 +66,7 @@ Read Json values exactly as properties.
     Jval: TJsonValue;
    ...
   // TulipEasyjsonReader is case sensitive.
-  Edit1.Text := jval.data.LastName;
+  Edit1.Text := jval.jdata.LastName;
 ```
 
 # Space in the key name
@@ -76,7 +76,7 @@ to get "First Name" value: // notice there is a space between Frist and Name
     Jval: TJsonValue;
    ...
   // Use two underscores "__" instead of space
-  Edit1.Text := jval.data.First__Name;
+  Edit1.Text := jval.jdata.First__Name;
 ```
 
 
@@ -87,10 +87,10 @@ The return is Variant so you can assign it to a variable without warry about cas
   var
     Jval: TJsonValue;
    ...
-  Edit1.Text := jval.data.Age; // using age value as string
+  Edit1.Text := jval.jdata.Age; // using age value as string
 
   var MyAge: Integer;
-  MyAge := jval.data.Age;  // here using age value as integer :)
+  MyAge := jval.jdata.Age;  // here using age value as integer :)
 ```
 
 # Reading from Array
@@ -99,7 +99,7 @@ The return is Variant so you can assign it to a variable without warry about cas
   var
     Jval: TJsonValue;
    ...
-   Edit1.Text := jval.data.Lang(1); // getting the second element value from the array object.
+   Edit1.Text := jval.jdata.Lang(1); // getting the second element value from the array object.
 ```
 
 
@@ -110,7 +110,7 @@ get Address -> city
   var
     Jval: TJsonValue;
    ...
-  Edit1.Text := jval.data.Address.City;
+  Edit1.Text := jval.jdata.Address.City;
 ```
 
 ```Delphi
@@ -118,7 +118,7 @@ get Address -> city
     Jval: TJsonValue;
    ...
 
-   Edit1.Text := jval.data.Address.Tel(1).Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
+   Edit1.Text := jval.jdata.Address.Tel(1).Ext; // getting the "ext" value from the second element in "Tel" Array from Address Object :)
 ```
 
 # Installation
