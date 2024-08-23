@@ -61,51 +61,51 @@ implementation
 
 procedure TForm1.Button1Click( Sender: TObject );
 begin
-  Edit1.Text := jval.jdata.Lang(1);
+  Edit1.Text := jval.jData.Lang(1);
 end;
 
 procedure TForm1.Button2Click( Sender: TObject );
 begin
-  Edit1.Text := jval.jdata.Lang(2);
+  Edit1.Text := jval.jData.Lang(2);
 end;
 
 procedure TForm1.Button3Click( Sender: TObject );
 begin
   // for space use two underscores instead
-  Edit1.Text := jval.jdata.First__Name;
+  Edit1.Text := jval.jData.First__Name;
 end;
 
 procedure TForm1.Button4Click( Sender: TObject );
 begin
   // as String
-  Edit1.Text := jval.jdata.AGE;
+  Edit1.Text := jval.jData.AGE;
 
   // as number
   var
     age: integer;
-  age := jval.jdata.AGE;
+  age := jval.jData.AGE;
 
   //Edit1.Text := AGE.ToString;
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
 begin
-  Edit1.Text := jval.jdata.Address.City;
+  Edit1.Text := jval.jData.Address.City;
 end;
 
 procedure TForm1.Button6Click( Sender: TObject );
 begin
-  Edit1.Text := jval.jdata.Address.Tel(0).Home;
+  Edit1.Text := jval.jData.Address.Tel(0).Home;
 end;
 
 procedure TForm1.Button7Click( Sender: TObject );
 begin
-  Edit1.Text := jval.jdata.Address.Tel(1).Mobile;
+  Edit1.Text := jval.jData.Address.Tel(1).Mobile;
 end;
 
 procedure TForm1.Button8Click( Sender: TObject );
 begin
-  Edit1.Text := jval.jdata.Address.Tel(1).EXT;
+  Edit1.Text := jval.jData.Address.Tel(1).EXT;
 end;
 
 procedure TForm1.Button9Click( Sender: TObject );

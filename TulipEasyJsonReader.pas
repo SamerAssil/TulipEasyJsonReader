@@ -8,12 +8,10 @@
 
 unit TulipEasyJsonReader;
 
-/// IMPORTANT
-/// ALL KEYS IN THE JSON MUST BE IN CAPITAL CASE AND HAS NO SPACES
 ///
 /// to use it:
 /// 1. create TjsonValue object.
-/// 2. use property "jdata" to access the json fields.
+/// 2. use property "jData" to access the json fields.
 ///
 /// To get elements from array , just pass the index as parameter.
 ///
@@ -33,7 +31,7 @@ type
   private
     function GetjData: Variant;
   public
-    property jdata: Variant read GetjData;
+    property jData: Variant read GetjData;
   end;
 
   TVarJsonValueType = class(TInvokeableVariantType)
@@ -99,7 +97,7 @@ begin
 
       if (lv is TJsonArray) or (lv is TJSONObject) then
       begin
-        Variant(Dest) := lv.jdata;
+        Variant(Dest) := lv.jData;
         exit;
       end;
     end
@@ -113,7 +111,7 @@ begin
 
       if (jv is TJsonArray) or (jv is TJSONObject) then
       begin
-        Variant(Dest) := jv.jdata;
+        Variant(Dest) := jv.jData;
         exit;
       end;
     end;
