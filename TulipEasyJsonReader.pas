@@ -41,6 +41,8 @@ type
     procedure Clear(var V: TVarData); override;
     procedure Copy(var Dest: TVarData; const Source: TVarData; const Indirect: Boolean); override;
     function DoFunction(var Dest: TVarData; const V: TVarData; const Name: string; const Arguments: TVarDataArray): Boolean; override;
+    function SetProperty(const V: TVarData; const Name: string; const Value: TVarData): Boolean; override;
+
   end;
 
 {$A16}
@@ -56,8 +58,36 @@ type
 var
   VarJsonValueType: TVarJsonValueType = nil;
 
+
 implementation
 
+{ Helper Routine to convert Variant to TJsonValue (WRITE) }
+function VarDataToJsonValue(const V: TVarData): TJsonValue;
+begin
+var
+  VarVal: Variant;
+begin
+  VarVal := Variant(V);
+  if VarIsNull(VarVal) or VarIsEmpty(VarVal) then
+    Exit(TJSONNull.Create);
+
+  case VarType(VarVal) of
+    varSmallint, varInteger, varShortInt, varByte, varWord, varLongWord, varInt64, varUInt64:
+      Result := TJSONNumber.Create(Int64(VarVal));
+    varSingle, varDouble, varCurrency:
+      Result := TJSONNumber.Create(Double(VarVal));
+    varBoolean:
+      if Boolean(VarVal) then
+        Result := TJSONTrue.Create
+      else
+        Result := TJSONFalse.Create;
+    varString, varOleStr, varUString:
+      Result := TJSONString.Create(VarToStr(VarVal));
+  else
+    Result := TJSONString.Create(VarToStr(VarVal)); // Fallback
+  end;
+end;
+end;
 { TVarJsonStringType }
 
 procedure TVarJsonValueType.Clear(var V: TVarData);
@@ -130,6 +160,31 @@ function TVarJsonValueType.FixupIdent(const AText: string): string;
 begin
   Result := AText;
   Result := ReplaceText(Result, '__', ' ');
+end;
+
+function TVarJsonValueType.SetProperty(const V: TVarData; const Name: string; const Value: TVarData): Boolean;
+var
+  jObj: TJsonObject;
+  Pair: TJSONPair;
+  NewVal: TJsonValue;
+  Name_: String;
+begin
+  Result := true;
+  Name_ := FixupIdent(Name);
+
+  jObj := TJSONObject(TVarJsonValueData(V).JVal);
+
+  Pair := JObj.RemovePair(Name_);
+
+//  if (Pair = nil) then
+//    raise Exception.CreateFmt('Key "%s" not found. Adding new keys is locked.', [Name]);
+
+  if Assigned(Pair) then
+    Pair.Free;
+
+  NewVal := VarDataToJsonValue(Value);
+  JObj.AddPair(Name_, NewVal);
+
 end;
 
 { TJsonValueHelper }
