@@ -1,6 +1,8 @@
 # TulipEasyJsonReader
 Tulip Easy Json Reader
 
+<a href="https://www.buymeacoffee.com/samerassil" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # Support
 - Windows 32bit and 64bit (Console, VCL, FMX)
 - Android (FMX)
